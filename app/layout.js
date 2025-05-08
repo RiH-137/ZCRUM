@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
         style={{ colorScheme: "dark" }}
         className="dark"
       >
-        <body className={inter.className}>
+        <body className={`${inter.className} dotted-background`}>
           <ThemeProvider attribute="class" defaultTheme="dark">
             {/* Main content */}
 
