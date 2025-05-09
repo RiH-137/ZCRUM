@@ -10,28 +10,28 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware((auth, req) => {
+  const { userId, orgId } = auth();
 
-  // Check if the user is authenticated and redirect to sign-in if not
-  // and the route is protected
-  if (!auth().userId && isProtectedRoute(req)) {
+  if (!userId && isProtectedRoute(req)) {
     return auth().redirectToSignIn();
   }
 
-  if (
-    auth().userId &&
-    !auth().orgId &&
-    req.nextUrl.pathname !== "/onboarding" &&
-    req.nextUrl.pathname !== "/"
-  ) {
-    return NextResponse.redirect(new URL("/onboarding", req.url));
-  }
+  // if (
+  //   userId &&
+  //   !orgId &&
+  //   req.nextUrl.pathname !== "/onboarding" &&
+  //   req.nextUrl.pathname !== "/"
+  // ) {
+  //   return NextResponse.redirect(new URL("/onboarding", req.url));
+  // }
+
+  // return NextResponse.next();
 });
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
+    // Skip Next.js internals and static files
+    "/((?!_next|.*\\.(?:ico|png|jpg|jpeg|webp|svg|css|js|txt|woff|woff2|ttf|eot|otf|pdf|zip|gz)).*)",
     "/(api|trpc)(.*)",
   ],
 };

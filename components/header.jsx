@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -7,23 +6,24 @@ import UserMenu from "./user-menu";
 import { PenBox } from "lucide-react";
 import Image from "next/image";
 import { checkUser } from "@/lib/checkUser";
-// import UserLoading from "./UserLoading"; // Uncomment if you have this component
+import UserLoading from "./user-loading";
 
-const Header = async () => {
-  await checkUser(); // Ensure user is checked when the header is rendered
+async function Header() {
+  await checkUser();
+
   return (
     <header className="container mx-auto">
       <nav className="py-6 px-4 flex justify-between items-center">
         <Link href="/">
-          <div className="text-2xl font-bold">
+          <h1 className="text-2xl font-bold">
             <Image
-              src="/logo2.png"
+              src={"/logo2.png"}
               alt="Zscrum Logo"
               width={200}
               height={56}
               className="h-10 w-auto object-contain"
             />
-          </div>
+          </h1>
         </Link>
         <div className="flex items-center gap-4">
           <Link href="/project/create">
@@ -43,10 +43,9 @@ const Header = async () => {
         </div>
       </nav>
 
-      {/* Uncomment if UserLoading component exists */}
-      {/* <UserLoading /> */}
+      <UserLoading />
     </header>
   );
-};
+}
 
 export default Header;
