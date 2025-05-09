@@ -37,7 +37,8 @@ export default function RootLayout({ children }) {
         style={{ colorScheme: "dark" }}
         className="dark"
       >
-        <body className={`${inter.className} dotted-background`}>
+        <body className={`${inter.className} dotted-background`}
+        cz-shortcut-listen="true">
           <ThemeProvider attribute="class" defaultTheme="dark">
             {/* Main content */}
 
